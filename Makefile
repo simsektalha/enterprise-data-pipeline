@@ -36,6 +36,9 @@ logs-yarn: ## Show YARN logs
 logs-starburst: ## Show Starburst logs
 	docker-compose logs -f starburst-coordinator starburst-worker
 
+logs-impala: ## Show Impala logs
+	docker-compose logs -f impala-coordinator impala-catalog impala-statestore
+
 shell-starburst: ## Connect to Starburst CLI
 	docker-compose exec starburst-coordinator starburst --server starburst-coordinator:8080
 
@@ -50,6 +53,9 @@ shell-hdfs: ## Connect to HDFS CLI
 
 shell-yarn: ## Connect to YARN CLI
 	docker-compose exec resourcemanager yarn node -list
+
+shell-impala: ## Connect to Impala CLI
+	docker-compose exec impala-coordinator impala-shell
 
 clean: ## Clean up everything
 	docker-compose down -v

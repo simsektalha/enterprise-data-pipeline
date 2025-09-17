@@ -169,6 +169,62 @@ services:
       - STARBURST_ENVIRONMENT=production
     command: ["starburst", "run", "--worker"]
 
+  # Impala Coordinator
+  impala-coordinator:
+    image: apache/impala:4.4.0
+    depends_on:
+      - hive-metastore
+      - namenode
+    ports:
+      - "25000:25000"
+      - "25010:25010"
+      - "25020:25020"
+    environment:
+      - IMPALA_SERVICE_NAME=coordinator
+      - HIVE_METASTORE_HOST=hive-metastore
+      - HIVE_METASTORE_PORT=9083
+      - NAMENODE_HOST=namenode
+      - NAMENODE_PORT=9000
+    volumes:
+      - ./impala/conf:/opt/impala/conf
+    command: ["impala-coordinator"]
+
+  # Impala Catalog
+  impala-catalog:
+    image: apache/impala:4.4.0
+    depends_on:
+      - hive-metastore
+      - namenode
+    ports:
+      - "25020:25020"
+    environment:
+      - IMPALA_SERVICE_NAME=catalog
+      - HIVE_METASTORE_HOST=hive-metastore
+      - HIVE_METASTORE_PORT=9083
+      - NAMENODE_HOST=namenode
+      - NAMENODE_PORT=9000
+    volumes:
+      - ./impala/conf:/opt/impala/conf
+    command: ["impala-catalog"]
+
+  # Impala StateStore
+  impala-statestore:
+    image: apache/impala:4.4.0
+    depends_on:
+      - hive-metastore
+      - namenode
+    ports:
+      - "25010:25010"
+    environment:
+      - IMPALA_SERVICE_NAME=statestore
+      - HIVE_METASTORE_HOST=hive-metastore
+      - HIVE_METASTORE_PORT=9083
+      - NAMENODE_HOST=namenode
+      - NAMENODE_PORT=9000
+    volumes:
+      - ./impala/conf:/opt/impala/conf
+    command: ["impala-statestore"]
+
   # Airflow Webserver
   airflow-webserver:
     build:
