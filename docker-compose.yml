@@ -81,6 +81,33 @@ services:
       timeout: 20s
       retries: 3
 
+  # HDFS NameNode
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: namenode
+    restart: always
+    ports:
+      - "9870:9870"
+      - "9000:9000"
+    volumes:
+      - namenode_data:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=test
+    env_file:
+      - ./hadoop.env
+
+  # HDFS DataNode
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode
+    restart: always
+    volumes:
+      - datanode_data:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+    env_file:
+      - ./hadoop.env
+
   # Hive Metastore
   hive-metastore:
     image: apache/hive:4.0.0
@@ -272,4 +299,6 @@ volumes:
   zookeeper_data:
   zookeeper_logs:
   kafka_data:
+  namenode_data:
+  datanode_data:
 

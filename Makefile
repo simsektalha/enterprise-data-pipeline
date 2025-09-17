@@ -27,6 +27,9 @@ logs-minio: ## Show MinIO logs
 logs-kafka: ## Show Kafka logs
 	docker-compose logs -f kafka zookeeper
 
+logs-hdfs: ## Show HDFS logs
+	docker-compose logs -f namenode datanode
+
 shell-trino: ## Connect to Trino CLI
 	docker-compose exec trino-coordinator trino --server trino-coordinator:8080
 
@@ -35,6 +38,9 @@ shell-minio: ## Connect to MinIO CLI
 
 shell-kafka: ## Connect to Kafka CLI
 	docker-compose exec kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic orders --from-beginning
+
+shell-hdfs: ## Connect to HDFS CLI
+	docker-compose exec namenode hdfs dfs -ls /
 
 clean: ## Clean up everything
 	docker-compose down -v
