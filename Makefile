@@ -30,6 +30,9 @@ logs-kafka: ## Show Kafka logs
 logs-hdfs: ## Show HDFS logs
 	docker-compose logs -f namenode datanode
 
+logs-yarn: ## Show YARN logs
+	docker-compose logs -f resourcemanager nodemanager
+
 shell-trino: ## Connect to Trino CLI
 	docker-compose exec trino-coordinator trino --server trino-coordinator:8080
 
@@ -41,6 +44,9 @@ shell-kafka: ## Connect to Kafka CLI
 
 shell-hdfs: ## Connect to HDFS CLI
 	docker-compose exec namenode hdfs dfs -ls /
+
+shell-yarn: ## Connect to YARN CLI
+	docker-compose exec resourcemanager yarn node -list
 
 clean: ## Clean up everything
 	docker-compose down -v
