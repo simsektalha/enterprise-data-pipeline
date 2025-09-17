@@ -63,6 +63,9 @@ shell-impala: ## Connect to Impala CLI
 shell-spark: ## Connect to Spark CLI
 	docker-compose exec spark-master spark-shell
 
+setup-iceberg: ## Setup Iceberg tables
+	python scripts/iceberg_utils.py
+
 clean: ## Clean up everything
 	docker-compose down -v
 	docker system prune -f
