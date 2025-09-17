@@ -39,6 +39,9 @@ logs-starburst: ## Show Starburst logs
 logs-impala: ## Show Impala logs
 	docker-compose logs -f impala-coordinator impala-catalog impala-statestore
 
+logs-spark: ## Show Spark logs
+	docker-compose logs -f spark-master spark-worker
+
 shell-starburst: ## Connect to Starburst CLI
 	docker-compose exec starburst-coordinator starburst --server starburst-coordinator:8080
 
@@ -56,6 +59,9 @@ shell-yarn: ## Connect to YARN CLI
 
 shell-impala: ## Connect to Impala CLI
 	docker-compose exec impala-coordinator impala-shell
+
+shell-spark: ## Connect to Spark CLI
+	docker-compose exec spark-master spark-shell
 
 clean: ## Clean up everything
 	docker-compose down -v

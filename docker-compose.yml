@@ -225,6 +225,44 @@ services:
       - ./impala/conf:/opt/impala/conf
     command: ["impala-statestore"]
 
+  # Spark Master
+  spark-master:
+    image: bde2020/spark-master:3.4.0-hadoop3.3
+    container_name: spark-master
+    depends_on:
+      - namenode
+      - resourcemanager
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+    environment:
+      - INIT_DAEMON_STEP=setup_spark
+    volumes:
+      - ./spark/conf:/spark/conf
+      - ./spark/apps:/spark/apps
+      - ./spark/data:/spark/data
+    env_file:
+      - ./hadoop.env
+
+  # Spark Worker
+  spark-worker:
+    image: bde2020/spark-worker:3.4.0-hadoop3.3
+    container_name: spark-worker
+    depends_on:
+      - spark-master
+      - namenode
+      - resourcemanager
+    ports:
+      - "8081:8081"
+    environment:
+      - "SPARK_MASTER=spark://spark-master:7077"
+    volumes:
+      - ./spark/conf:/spark/conf
+      - ./spark/apps:/spark/apps
+      - ./spark/data:/spark/data
+    env_file:
+      - ./hadoop.env
+
   # Airflow Webserver
   airflow-webserver:
     build:
