@@ -2,6 +2,8 @@ apache-airflow==2.8.1
 apache-airflow-providers-postgres==5.10.0
 apache-airflow-providers-http==4.7.0
 apache-airflow-providers-amazon==8.15.0
+apache-airflow-providers-apache-kafka==1.0.0
 trino==0.330
 pandas==2.1.4
 requests==2.31.0
+kafka-python==2.0.2

@@ -24,11 +24,17 @@ logs-trino: ## Show Trino logs
 logs-minio: ## Show MinIO logs
 	docker-compose logs -f minio
 
+logs-kafka: ## Show Kafka logs
+	docker-compose logs -f kafka zookeeper
+
 shell-trino: ## Connect to Trino CLI
 	docker-compose exec trino-coordinator trino --server trino-coordinator:8080
 
 shell-minio: ## Connect to MinIO CLI
 	docker-compose exec minio mc alias set myminio http://minio:9000 minioadmin minioadmin
+
+shell-kafka: ## Connect to Kafka CLI
+	docker-compose exec kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic orders --from-beginning
 
 clean: ## Clean up everything
 	docker-compose down -v
