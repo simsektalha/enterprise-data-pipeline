@@ -7,3 +7,4 @@ trino==0.330
 pandas==2.1.4
 requests==2.31.0
 kafka-python==2.0.2
+starburst-enterprise==435

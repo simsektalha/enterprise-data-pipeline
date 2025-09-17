@@ -33,8 +33,11 @@ logs-hdfs: ## Show HDFS logs
 logs-yarn: ## Show YARN logs
 	docker-compose logs -f resourcemanager nodemanager
 
-shell-trino: ## Connect to Trino CLI
-	docker-compose exec trino-coordinator trino --server trino-coordinator:8080
+logs-starburst: ## Show Starburst logs
+	docker-compose logs -f starburst-coordinator starburst-worker
+
+shell-starburst: ## Connect to Starburst CLI
+	docker-compose exec starburst-coordinator starburst --server starburst-coordinator:8080
 
 shell-minio: ## Connect to MinIO CLI
 	docker-compose exec minio mc alias set myminio http://minio:9000 minioadmin minioadmin

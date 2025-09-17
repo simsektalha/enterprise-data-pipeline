@@ -143,27 +143,31 @@ services:
     ports:
       - "9083:9083"
 
-  # Trino Coordinator
-  trino-coordinator:
-    image: trinodb/trino:435
+  # Starburst Coordinator
+  starburst-coordinator:
+    image: starburstdata/starburst-enterprise:435-e.1
     depends_on:
       - hive-metastore
+      - namenode
     ports:
       - "8080:8080"
     volumes:
-      - ./trino/etc:/etc/trino
+      - ./starburst/etc:/etc/starburst
     environment:
-      - TRINO_ENVIRONMENT=production
+      - STARBURST_ENVIRONMENT=production
+    command: ["starburst", "run", "--coordinator"]
 
-  # Trino Worker
-  trino-worker:
-    image: trinodb/trino:435
+  # Starburst Worker
+  starburst-worker:
+    image: starburstdata/starburst-enterprise:435-e.1
     depends_on:
-      - trino-coordinator
+      - starburst-coordinator
+      - namenode
     volumes:
-      - ./trino/etc:/etc/trino
+      - ./starburst/etc:/etc/starburst
     environment:
-      - TRINO_ENVIRONMENT=production
+      - STARBURST_ENVIRONMENT=production
+    command: ["starburst", "run", "--worker"]
 
   # Airflow Webserver
   airflow-webserver:
