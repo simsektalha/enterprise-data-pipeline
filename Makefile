@@ -66,6 +66,18 @@ shell-spark: ## Connect to Spark CLI
 setup-iceberg: ## Setup Iceberg tables
 	python scripts/iceberg_utils.py
 
+dbt-debug: ## Run dbt debug
+	python scripts/dbt_utils.py
+
+dbt-run: ## Run dbt models
+	cd dbt_project && dbt run
+
+dbt-test: ## Run dbt tests
+	cd dbt_project && dbt test
+
+dbt-docs: ## Generate and serve dbt docs
+	cd dbt_project && dbt docs generate && dbt docs serve --port 8080
+
 clean: ## Clean up everything
 	docker-compose down -v
 	docker system prune -f

@@ -1,0 +1,97 @@
+version: 2
+
+sources:
+  - name: raw_data
+    description: "Raw data from streaming and batch processing"
+    tables:
+      - name: orders
+        description: "Raw orders data from Kafka streaming"
+        columns:
+          - name: order_id
+            description: "Unique order identifier"
+            tests:
+              - not_null
+              - unique
+          - name: customer_id
+            description: "Customer identifier"
+            tests:
+              - not_null
+          - name: product_id
+            description: "Product identifier"
+            tests:
+              - not_null
+          - name: quantity
+            description: "Order quantity"
+            tests:
+              - not_null
+              - dbt_utils.accepted_range:
+                  min_value: 1
+                  max_value: 100
+          - name: price
+            description: "Product price"
+            tests:
+              - not_null
+              - dbt_utils.accepted_range:
+                  min_value: 0
+                  max_value: 10000
+          - name: order_date
+            description: "Order date"
+            tests:
+              - not_null
+          - name: status
+            description: "Order status"
+            tests:
+              - not_null
+              - accepted_values:
+                  values: ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled']
+      
+      - name: customers
+        description: "Raw customers data from Kafka streaming"
+        columns:
+          - name: customer_id
+            description: "Unique customer identifier"
+            tests:
+              - not_null
+              - unique
+          - name: name
+            description: "Customer name"
+            tests:
+              - not_null
+          - name: email
+            description: "Customer email"
+            tests:
+              - not_null
+              - dbt_utils.expression_is_true:
+                  expression: "email like '%@%'"
+          - name: country
+            description: "Customer country"
+            tests:
+              - not_null
+          - name: registration_date
+            description: "Customer registration date"
+            tests:
+              - not_null
+      
+      - name: products
+        description: "Raw products data from Kafka streaming"
+        columns:
+          - name: product_id
+            description: "Unique product identifier"
+            tests:
+              - not_null
+              - unique
+          - name: name
+            description: "Product name"
+            tests:
+              - not_null
+          - name: category
+            description: "Product category"
+            tests:
+              - not_null
+          - name: price
+            description: "Product price"
+            tests:
+              - not_null
+              - dbt_utils.accepted_range:
+                  min_value: 0
+                  max_value: 10000

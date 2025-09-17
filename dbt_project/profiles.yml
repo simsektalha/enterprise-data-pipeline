@@ -1,0 +1,32 @@
+enterprise_data_pipeline:
+  target: dev
+  outputs:
+    dev:
+      type: trino
+      method: none
+      user: admin
+      password: ''
+      host: starburst-coordinator
+      port: 8080
+      catalog: iceberg
+      schema: default
+      threads: 4
+      retries: 3
+      retry_delay: 1
+      retry_on_errors: true
+      # Starburst specific configurations
+      session_properties:
+        query_max_memory: '5GB'
+        query_max_execution_time: '1h'
+        join_distribution_type: 'BROADCAST'
+        join_algorithm: 'AUTOMATIC'
+        optimize_metadata_queries: 'true'
+        optimize_hash_generation: 'true'
+        # Iceberg specific properties
+        iceberg.catalog.type: 'hive_metastore'
+        hive.metastore.uri: 'thrift://hive-metastore:9083'
+        hive.s3.endpoint: 'http://minio:9000'
+        hive.s3.path-style-access: 'true'
+        hive.s3.aws-access-key: 'minioadmin'
+        hive.s3.aws-secret-key: 'minioadmin'
+        hive.s3.ssl.enabled: 'false'
