@@ -21,3 +21,6 @@
         <value>thrift://hive-metastore:9083</value>
     </property>
 </configuration>
+
+
+

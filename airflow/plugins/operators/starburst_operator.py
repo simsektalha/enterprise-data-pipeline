@@ -60,3 +60,6 @@ class StarburstOperator(BaseOperator):
             error_msg = f"Unexpected error executing Starburst query: {str(e)}"
             logging.error(error_msg)
             raise AirflowException(error_msg)
+
+
+

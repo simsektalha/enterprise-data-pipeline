@@ -30,3 +30,6 @@ enterprise_data_pipeline:
         hive.s3.aws-access-key: 'minioadmin'
         hive.s3.aws-secret-key: 'minioadmin'
         hive.s3.ssl.enabled: 'false'
+
+
+

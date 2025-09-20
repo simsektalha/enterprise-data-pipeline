@@ -58,3 +58,6 @@
         where {{ column_name }} not in ({{ var('accepted_values') | join(',') }})
     {% endif %}
 {% endmacro %}
+
+
+

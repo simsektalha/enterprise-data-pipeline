@@ -302,3 +302,6 @@ with TaskGroup("health_checks", dag=dag) as health_checks_group:
 # Define task dependencies
 data_generation_group >> data_ingestion_group >> data_processing_group >> data_storage_group >> data_analytics_group >> data_quality_group
 health_checks_group >> data_generation_group
+
+
+

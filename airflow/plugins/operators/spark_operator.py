@@ -73,3 +73,6 @@ class SparkOperator(BaseOperator):
             error_msg = f"Unexpected error executing Spark job: {str(e)}"
             logging.error(error_msg)
             raise AirflowException(error_msg)
+
+
+

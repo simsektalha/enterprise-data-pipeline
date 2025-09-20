@@ -98,3 +98,6 @@ INSERT INTO iceberg.default.products VALUES
 
 -- Show created tables
 SHOW TABLES FROM iceberg.default;
+
+
+

@@ -64,3 +64,4 @@ consume_messages = BashOperator(
 )
 
 produce_to_kafka >> check_kafka_topics >> consume_messages
+

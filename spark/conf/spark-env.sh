@@ -12,3 +12,6 @@ export SPARK_LOG_DIR=/tmp/spark-logs
 export SPARK_LOCAL_DIRS=/tmp/spark-local
 export HADOOP_CONF_DIR=/spark/conf
 export YARN_CONF_DIR=/spark/conf
+
+
+

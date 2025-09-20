@@ -29,3 +29,6 @@ where price <= 0
 select count(*) as failures
 from {{ ref('stg_orders') }}
 where quantity <= 0
+
+
+

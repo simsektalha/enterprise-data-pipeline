@@ -24,3 +24,4 @@ COPY plugins/ /opt/airflow/plugins/
 # Set permissions
 RUN chmod -R 755 /opt/airflow/scripts
 RUN chmod -R 755 /opt/airflow/plugins
+
