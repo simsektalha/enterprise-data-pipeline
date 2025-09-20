@@ -295,7 +295,6 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-    restart: always
 
   # Airflow Scheduler
   airflow-scheduler:
@@ -319,7 +318,6 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-    restart: always
 
   # Airflow Init
   airflow-init:
@@ -329,13 +327,6 @@ services:
     entrypoint: /bin/bash
     depends_on:
       - postgres
-    environment:
-      <<: *airflow-common-env
-    volumes:
-      - ./airflow/dags:/opt/airflow/dags
-      - ./airflow/plugins:/opt/airflow/plugins
-      - ./airflow/logs:/opt/airflow/logs
-      - ./airflow/scripts:/opt/airflow/scripts
     command:
       - -c
       - |
