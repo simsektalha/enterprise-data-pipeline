@@ -374,14 +374,6 @@ docker-compose logs airflow
 - **Schema Documentation**: Generated automatically
 - **Data Lineage**: Available in dbt docs
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -393,14 +385,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - dbt Labs
 - Docker Inc.
 - The open-source community
-
-## 📞 Support
-
-For questions and support:
-- Create an issue in the repository
-- Check the troubleshooting section
-- Review the logs for error messages
-
----
-
-**Note**: This is a demonstration project for learning and portfolio purposes. For production use, additional security, monitoring, and operational considerations should be implemented.
