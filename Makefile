@@ -1,4 +1,4 @@
-.PHONY: help up down logs shell-trino shell-minio clean
+.PHONY: help up down logs shell-trino shell-minio clean uv-install uv-sync uv-lock
 
 help: ## Show this help message
 	@echo 'Usage: make [target]'
@@ -81,3 +81,19 @@ dbt-docs: ## Generate and serve dbt docs
 clean: ## Clean up everything
 	docker-compose down -v
 	docker system prune -f
+
+# UV Package Management
+uv-install: ## Install uv package manager
+	curl -LsSf https://astral.sh/uv/install.sh | sh
+
+uv-sync: ## Sync dependencies using uv
+	uv sync
+
+uv-lock: ## Generate uv.lock file
+	uv lock
+
+uv-add: ## Add a new dependency (usage: make uv-add PACKAGE=package-name)
+	uv add $(PACKAGE)
+
+uv-remove: ## Remove a dependency (usage: make uv-remove PACKAGE=package-name)
+	uv remove $(PACKAGE)

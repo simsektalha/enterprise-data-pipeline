@@ -1,0 +1,82 @@
+[project]
+name = "data-pipeline-portfolio"
+version = "1.0.0"
+description = "Enterprise Data Pipeline with Airflow, Spark, Kafka, HDFS, Starburst, and dbt"
+authors = [
+    {name = "Data Engineering Team", email = "team@company.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    # Airflow core
+    "apache-airflow==2.8.1",
+    "apache-airflow-providers-postgres==5.10.0",
+    "apache-airflow-providers-apache-kafka==1.0.0",
+    "apache-airflow-providers-apache-spark==1.0.0",
+    
+    # Database connectors
+    "psycopg2-binary==2.9.9",
+    "pymysql==1.1.0",
+    "sqlalchemy>=1.4.28,<2.0",
+    
+    # Data processing
+    "pandas>=2.0.0,<3.0.0",
+    "numpy>=1.24.0,<2.0.0",
+    "pyspark==3.4.0",
+    "kafka-python==2.0.2",
+    
+    # Starburst/Trino
+    "trino==0.328.0",
+    
+    # dbt
+    "dbt-core==1.7.4",
+    "dbt-trino==1.7.0",
+    
+    # Utilities
+    "requests>=2.28.0",
+    "python-dotenv>=1.0.0",
+    "pyyaml>=6.0.0",
+    "minio>=7.0.0",
+    "pyhive>=0.7.0",
+    "thrift>=0.16.0",
+    "sasl>=0.3.0",
+    "thrift-sasl>=0.4.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==7.4.3",
+    "pytest-cov==4.1.0",
+    "black==23.11.0",
+    "isort==5.12.0",
+    "flake8==6.1.0",
+    "mypy==1.7.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest==7.4.3",
+    "pytest-cov==4.1.0",
+    "black==23.11.0",
+    "isort==5.12.0",
+    "flake8==6.1.0",
+    "mypy==1.7.1",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true

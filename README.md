@@ -30,6 +30,7 @@ Kafka → Spark Streaming → HDFS → Spark Batch → Iceberg Tables → Starbu
 - Docker and Docker Compose
 - Python 3.11+
 - Git
+- uv (Python package manager) - Install with: `curl -LsSf https://astral.sh/uv/install.sh | sh`
 
 ### 1. Clone and Setup
 ```bash
@@ -206,6 +207,30 @@ make dbt-run
 
 # Run Airflow DAGs
 # Access Airflow UI at http://localhost:8080
+```
+
+### Package Management with uv
+
+This project uses `uv` for fast Python package management. Here are the key commands:
+
+```bash
+# Install uv (if not already installed)
+make uv-install
+
+# Sync dependencies (install all packages from pyproject.toml)
+make uv-sync
+
+# Generate lock file
+make uv-lock
+
+# Add a new dependency
+make uv-add PACKAGE=package-name
+
+# Remove a dependency
+make uv-remove PACKAGE=package-name
+
+# Install development dependencies
+uv sync --dev
 ```
 
 ### Monitoring and Debugging
